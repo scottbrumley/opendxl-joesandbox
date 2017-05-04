@@ -4,6 +4,8 @@
 * Copy client certificates to the certs/ directory
 * Copy dxlclient.config to your / root directory
 
+![File Structure](images/directorystruct.png)
+
 ### Example dxlclient.config
 ```
 [Certs]
