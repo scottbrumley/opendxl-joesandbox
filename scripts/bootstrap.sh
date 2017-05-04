@@ -17,7 +17,11 @@ setEnvironment(){
 ## Sets Environment variables like keys and other sensitive or environmental data
     /vagrant/scripts/env.sh
 
-    sudo echo "python joe-service.py" | sudo tee -a /etc/environment
+
+}
+
+runProgram(){
+    sudo echo "/usr/bin/python /vagrant/joe-service.py" | sudo tee -a /etc/bash.bashrc
 }
 
 function installOpenDXLTIEClient {
@@ -32,3 +36,4 @@ function installOpenDXLTIEClient {
 setEnvironment
 installOpenDXLTIEClient
 installRequests
+runProgram
