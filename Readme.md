@@ -12,7 +12,7 @@
 
 ### Example
 ```
-./vssh.sh on Linux
+./vssh.sh on Linux/Mac OS
 vssh.sh on Windows (make sure Windows has Git ssh in the path)
 ```
 
