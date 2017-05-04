@@ -2,12 +2,12 @@
 
 ## Prerequisites
 
-[Dependencies](dependencies.md)
+[Dependencies](docs/dependencies.md)
 
 ## Quick Start
 
 1. Clone GitHub - **git clone https://github.com/scottbrumley/opendxl-joesandbox.git**
-2. [Copy DXL Information](dxlinfo.md)
+2. [Copy DXL Information](docs/dxlinfo.md)
 3. Start Environment - **vssh.sh** 
 
 ### Example
