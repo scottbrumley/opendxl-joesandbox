@@ -36,7 +36,6 @@ function installOpenDXLTIEClient {
     sudo python setup.py install
 }
 
-setEnvironment
 installOpenDXLTIEClient
 installRequests
 runProgram
