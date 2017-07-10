@@ -22,6 +22,7 @@ setEnvironment(){
 
 runProgram(){
     sudo echo "/usr/bin/python /vagrant/joe-service.py" | sudo tee -a /etc/bash.bashrc
+    sudo echo "Joe Sandbox Service is Running ..."
 }
 
 function installOpenDXLTIEClient {
