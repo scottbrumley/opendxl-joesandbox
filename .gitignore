@@ -111,7 +111,6 @@ brokercerts
 dxlclient.config
 certs
 opendxl-client-python
-/scripts/env.sh
 /reports/
 OpenDXLClass042017
 examples
