@@ -2,6 +2,10 @@
 
 #set -e
 
+## Set your Environment variables.
+joeAPI="Your API Key" # Joe API Key to allow you're web requests
+joePOLL=15  # Joe Sandbox polling time in Minutes
+
 if [[ -d "/vagrant" ]]; then
     ROOT_DIR="/vagrant/"
 else
@@ -19,7 +23,7 @@ setEnvironment(){
 }
 
 runProgram(){
-    sudo echo "/usr/bin/python /vagrant/joe-service.py" | sudo tee -a /etc/bash.bashrc
+    sudo echo "JOE_POLL={joePOLL} JOE_KEY={joeAPI} /usr/bin/python /vagrant/joe-service.py" | sudo tee -a /etc/bash.bashrc
     sudo echo "Joe Sandbox Service is Running ..."
 }
 
