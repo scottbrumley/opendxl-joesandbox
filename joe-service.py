@@ -26,6 +26,14 @@ from dxlclient.client_config import DxlClientConfig
 from dxltieclient import TieClient
 from dxltieclient.constants import HashType, TrustLevel, FileProvider, ReputationProp, CertProvider, CertReputationProp, CertReputationOverriddenProp
 
+### Import Requests
+try:
+    import requests
+    from requests.exceptions import ConnectionError
+except ImportError:
+    print "Error: Please install the Python 'requests' package via pip"
+    sys.exit()
+
 # Import common logging and configuration
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/..")
 
@@ -46,6 +54,19 @@ CONFIG_FILE_NAME = "/vagrant/dxlclient.config"
 # Create DXL configuration from file
 config = DxlClientConfig.create_dxl_config_from_file(CONFIG_FILE_NAME)
 CONFIG_FILE = os.path.dirname(os.path.abspath(__file__)) + "/" + CONFIG_FILE_NAME
+
+def convertInterval(pollMins):
+    print "Polling set to " + str(pollMins) + " Minutes"
+
+    if pollMins != None:
+        pollMins = float(pollMins)
+        return pollMins * 60
+    else:
+        return 0.0
+
+# Get Environment Variables for Joe Sandbox
+apiKey = os.environ.get('JOE_KEY')
+pollInterval = convertInterval(os.environ.get('JOE_POLL'))  ## Get Joe Polling Interval and convert to floating seconds
 
 ## Check if it is a SHA1
 def is_sha1(maybe_sha):
@@ -144,15 +165,6 @@ def setReputation(trustlevelStr, md5, sha1, sha256, filenameStr, commentStr):
             print "invalid trust level",
             trustlevel = trustlevelStr
 
-def convertInterval(pollMins):
-    print "Polling set to " + str(pollMins) + " Minutes"
-
-    if pollMins != None:
-        pollMins = float(pollMins)
-        return pollMins * 60
-    else:
-        return 0.0
-
 def getJoeList():
     analysisUrl = server +'analysis/list'
     #deleteUrl = server +'analysis/delete'
@@ -206,20 +218,10 @@ def getJoeList():
         sys.exit()
 
 def main():
-    # Get Environment Variables
-    apiKey = os.environ.get('JOE_KEY')
-    pollInterval = convertInterval(os.environ.get('JOE_POLL'))  ## Get Joe Polling Interval and convert to floating seconds
 
     if pollInterval == 0:
         print "Polling Interval Needs to be set in environment variable JOE_POLL"
         exit(0)
-
-    try:
-        import requests
-        from requests.exceptions import ConnectionError
-    except ImportError:
-        print "Error: Please install the Python 'requests' package via pip"
-        sys.exit()
 
     print ""
     print "--- Joe Sandbox metadata script ---"
