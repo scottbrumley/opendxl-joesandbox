@@ -145,7 +145,7 @@ def setReputation(trustlevelStr, md5, sha1, sha256, filenameStr, commentStr):
             trustlevel = trustlevelStr
 
 def convertInterval(pollMins):
-    print "Polling set to " + float(pollMins) + " Minutes"
+    print "Polling set to " + str(pollMins) + " Minutes"
     pollMins = float(pollMins)
     if pollMins != None:
         return pollMins * 60
