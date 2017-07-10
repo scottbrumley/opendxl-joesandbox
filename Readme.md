@@ -8,7 +8,7 @@
 
 1. Clone GitHub - **git clone https://github.com/scottbrumley/opendxl-joesandbox.git**
 2. [Copy DXL Information](docs/dxlinfo.md)
-3. Edit your scripts/env.sh script 
+3. Edit your scripts/bootstrap.sh script and Add your Joe Sandbox Key
 4. Start Environment - **vssh.sh** 
 
 ### Example
