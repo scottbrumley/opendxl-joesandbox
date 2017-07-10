@@ -23,7 +23,7 @@ setEnvironment(){
 }
 
 runProgram(){
-    sudo echo "JOE_POLL={joePOLL} JOE_KEY={joeAPI} /usr/bin/python /vagrant/joe-service.py" | sudo tee -a /etc/bash.bashrc
+    sudo echo "JOE_POLL=${joePOLL} JOE_KEY=${joeAPI} /usr/bin/python /vagrant/joe-service.py" | sudo tee -a /etc/bash.bashrc
     sudo echo "Joe Sandbox Service is Running ..."
 }
 
