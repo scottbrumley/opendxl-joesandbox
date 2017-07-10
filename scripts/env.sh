@@ -7,5 +7,5 @@ joePOLL=15  # Joe Sandbox polling time in Minutes
 sudo echo "export JOE_KEY='${joeAPI}'" | sudo tee -a /etc/environment
 sudo echo "export JOE_POLL='${joePOLL}'" | sudo tee -a /etc/environment
 
-sudo export JOE_KEY=${joeAPI}
-sudo export JOE_POLL=${joePOLL}
+export JOE_KEY=${joeAPI}
+export JOE_POLL=${joePOLL}
