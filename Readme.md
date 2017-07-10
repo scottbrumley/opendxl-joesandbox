@@ -12,7 +12,7 @@
 4. Start Environment - **vssh.sh** 
 
 ## Quick Start Video
-!(Joe Sandbox Dev Environment Video)[https://youtu.be/3aCX6tAZC4o]
+[Joe Sandbox Dev Environment Video](https://youtu.be/3aCX6tAZC4o)
 
 ### Example
 ```
