@@ -49,7 +49,7 @@ logger.addHandler(console_handler)
 logger.setLevel(logging.INFO)
 
 ## DXL Client Configuration
-CONFIG_FILE_NAME = "./dxlclient.config"
+CONFIG_FILE_NAME = "dxlclient.config"
 
 # Create DXL configuration from file
 config = DxlClientConfig.create_dxl_config_from_file(CONFIG_FILE_NAME)
