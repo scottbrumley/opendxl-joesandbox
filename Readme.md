@@ -14,6 +14,24 @@
 ## Quick Start Video
 [Joe Sandbox Dev Environment Video](https://youtu.be/3aCX6tAZC4o)
 
+## Python Only Install
+``` 
+1. git clone https://github.com/opendxl/opendxl-bootstrap-python.git
+2. cd opendxl-bootstrap-python
+3. python setup.py install  **Might Need sudo**
+4. cd ..
+5. git clone https://github.com/opendxl/opendxl-tie-client-python.git
+6. cd opendxl-tie-client-python
+7. python setup.py install  **Might Need sudo**
+8. cd ..
+9. python setup.py install **Might Need sudo**
+```
+
+## Run Python Only
+``` 
+JOE_POLL='1' JOE_KEY='API Key' python joe-service.py
+```
+
 ### Example
 ```
 ./vssh.sh on Linux/Mac OS
