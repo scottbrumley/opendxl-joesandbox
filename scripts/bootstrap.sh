@@ -16,8 +16,6 @@ installRequests(){
 setEnvironment(){
 ## Sets Environment variables like keys and other sensitive or environmental data
     /vagrant/scripts/env.sh
-
-
 }
 
 runProgram(){
