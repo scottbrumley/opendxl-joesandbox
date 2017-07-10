@@ -153,21 +153,6 @@ def convertInterval(pollMins):
     else:
         return 0.0
 
-# Get Environment Variables
-apiKey = os.environ.get('JOE_KEY')
-pollInterval = convertInterval(os.environ.get('JOE_POLL'))  ## Get Joe Polling Interval and convert to floating seconds
-
-if pollInterval == 0:
-    print "Polling Interval Needs to be set in environment variable JOE_POLL"
-    exit(0)
-
-try:
-    import requests
-    from requests.exceptions import ConnectionError
-except ImportError:
-    print "Error: Please install the Python 'requests' package via pip"
-    sys.exit()
-
 def getJoeList():
     analysisUrl = server +'analysis/list'
     #deleteUrl = server +'analysis/delete'
@@ -221,6 +206,21 @@ def getJoeList():
         sys.exit()
 
 def main():
+    # Get Environment Variables
+    apiKey = os.environ.get('JOE_KEY')
+    pollInterval = convertInterval(os.environ.get('JOE_POLL'))  ## Get Joe Polling Interval and convert to floating seconds
+
+    if pollInterval == 0:
+        print "Polling Interval Needs to be set in environment variable JOE_POLL"
+        exit(0)
+
+    try:
+        import requests
+        from requests.exceptions import ConnectionError
+    except ImportError:
+        print "Error: Please install the Python 'requests' package via pip"
+        sys.exit()
+
     print ""
     print "--- Joe Sandbox metadata script ---"
     print ""
