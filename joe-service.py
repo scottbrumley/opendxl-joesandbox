@@ -146,11 +146,12 @@ def setReputation(trustlevelStr, md5, sha1, sha256, filenameStr, commentStr):
 
 def convertInterval(pollMins):
     print "Polling set to " + str(pollMins) + " Minutes"
-    pollMins = float(pollMins)
+
     if pollMins != None:
+        pollMins = float(pollMins)
         return pollMins * 60
     else:
-        return 0
+        return 0.0
 
 # Get Environment Variables
 apiKey = os.environ.get('JOE_KEY')
