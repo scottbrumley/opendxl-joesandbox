@@ -49,11 +49,13 @@ logger.addHandler(console_handler)
 logger.setLevel(logging.INFO)
 
 ## DXL Client Configuration
-CONFIG_FILE_NAME = "dxlclient.config"
+CONFIG_FILE_NAME = "/vagrant/dxlclient.config"
+if not os.path.isfile(CONFIG_FILE_NAME):
+    CONFIG_FILE_NAME = os.path.dirname(os.path.abspath(__file__)) + "/dxlclient.config"
 
 # Create DXL configuration from file
 config = DxlClientConfig.create_dxl_config_from_file(CONFIG_FILE_NAME)
-CONFIG_FILE = os.path.dirname(os.path.abspath(__file__)) + "/" + CONFIG_FILE_NAME
+#CONFIG_FILE = os.path.dirname(os.path.abspath(__file__)) + "/" + CONFIG_FILE_NAME
 
 def convertInterval(pollMins):
     print "Polling set to " + str(pollMins) + " Minutes"
@@ -122,7 +124,7 @@ def getTrustLevel(trustlevelStr):
     return -1
 
 ## Set the TIE reputation of a file via MD5, SHA1, or SHA256 hash
-def setReputation(trustlevelStr, md5, sha1, sha256, filenameStr, commentStr):
+def setReputation(trustlevelStr, md5, sha1, sha256, filenameStr, commentStr, tie_client):
     trustlevelInt = getTrustLevel(trustlevelStr)
 
     if md5 == None and sha1 == None and sha256 == None:
@@ -142,17 +144,9 @@ def setReputation(trustlevelStr, md5, sha1, sha256, filenameStr, commentStr):
             if not is_md5(md5):
                 print "invalid md5"
 
-    # Create the client
-    with DxlClient(config) as client:
-
-        # Connect to the fabric
-        client.connect()
-
-        # Create the McAfee Threat Intelligence Exchange (TIE) client
-        tie_client = TieClient(client)
-
         if trustlevelInt != -1:
             # Set the Enterprise reputation for notepad.exe to Known Trusted
+            print "Setting TIE Enterprise reputation for file:" , filenameStr , " to trust level:" , trustlevelInt
             tie_client.set_file_reputation(
                 trustlevelInt , {
                     HashType.MD5: md5,
@@ -165,7 +159,7 @@ def setReputation(trustlevelStr, md5, sha1, sha256, filenameStr, commentStr):
             print "invalid trust level",
             trustlevel = trustlevelStr
 
-def getJoeList():
+def getJoeList(tie_client):
     analysisUrl = server +'analysis/list'
     #deleteUrl = server +'analysis/delete'
 
@@ -206,7 +200,7 @@ def getJoeList():
             if key == "detections":
                 detectionsList = value.split(';')
                 trustlevelStr = joeMcAfee[detectionsList[-2]] ## Retrieve last value in list
-                setReputation(trustlevelStr, md5, sha1, sha256, filenameStr, commentStr)
+                setReputation(trustlevelStr, md5, sha1, sha256, filenameStr, commentStr,tie_client)
             print key, " : ", value
 
         #print content['webid']
@@ -227,9 +221,17 @@ def main():
     print "--- Joe Sandbox metadata script ---"
     print ""
 
-    while True:
-        getJoeList()
-        time.sleep(pollInterval)
+    # Create the client
+    with DxlClient(config) as client:
+
+        # Connect to the fabric
+        client.connect()
+
+        # Create the McAfee Threat Intelligence Exchange (TIE) client
+        tie_client = TieClient(client)
+        while True:
+            getJoeList(tie_client)
+            time.sleep(pollInterval)
 
 if __name__=="__main__":
     main()
